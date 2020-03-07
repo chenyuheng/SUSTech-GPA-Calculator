@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+		<title>南科大 GPA 计算器</title>
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css" />
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
+    <body onload="initiate()">
+      <div class="container">
+      	<div class="row">
+			<div class="col s12 l4">
+				<div class="pinned" id="pinned">
+					<h4>南科大 GPA 计算器</h4>
+					<div class="card blue-grey darken-1">
+						<div class="card-content white-text">
+							<div class="row">
+								<div class="col s12 center-align">
+									当前 GPA<h4><span id="GPA"></span></h4>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col s6 center-align">已选课程数量<br /><span id="courseNum"></span></div>
+								<div class="col s6 center-align">已选学分<br /><span id="selectedCredits"></span></div>
+							</div>
+						</div>
+						<div class="card-action row">
+							<div class="col s6 center-align"><a href="#">&nbsp;&nbsp;使用说明&nbsp;&nbsp;</a></div>
+							<div class="col s6 center-align"><a href="#">&nbsp;&nbsp;项目地址&nbsp;&nbsp;</a></div>
+						</div>
+					</div>
+				</div>
+			</div>
+      		<div class="col s12 l8">
+				<h4>课程列表</h4>
+				&nbsp;&nbsp;<input type="checkbox" class="filled-in" id="selectAll" checked="checked"><label for="selectAll" id="selectAllText">全不选</label>
+			    <ul class="collection" id="courseList">
+			    </ul>
+      		</div>
+      	</div>
+      </div>
+
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+	  <script src="js/app.js"></script>
+	  <script src="js/page.js"></script>
+    </body>
+  </html>
