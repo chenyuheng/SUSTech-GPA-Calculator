@@ -13,15 +13,14 @@ function getInfo() {
     let info = [];
     for (let i = 0; i < courseLength; i++) {
         item = [];
-        item["isTwoLevelGrade"] = getPara("twoLevelGrade" + i);
-        item["courseCode"] = decodeURI(getPara("courseCode" + i));
-        item["grade"] = getPara("grade" + i);
-        item["courseName"] = decodeURI(getPara("courseName" + i));
-        item["department"] = decodeURI(getPara("department" + i));
-        item["semester"] = decodeURI(getPara("semester" + i));
-        item["credits"] = parseInt(getPara("credits" + i));
-        item["learningHours"] = getPara("learningHours" + i);
-        item["englishCourseName"] = decodeURI(getPara("englishCourseName" + i));
+        item["isTwoLevelGrade"] = getPara("t" + i) == 'A';
+        item["courseCode"] = decodeURI(getPara("cc" + i));
+        item["grade"] = getPara("g" + i);
+        item["courseName"] = decodeURI(getPara("cn" + i));
+        item["department"] = decodeURI(getPara("d" + i));
+        item["semester"] = decodeURI(getPara("s" + i));
+        item["credits"] = parseInt(getPara("c" + i));
+        item["learningHours"] = getPara("lh" + i);
         info.push(item);
     }
     return info;
@@ -31,7 +30,7 @@ function display() {
     let str = "";
     for (let i = 0; i < info.length; i++) {
         let iconName = "";
-        if (info[i]["isTwoLevelGrade"] == "true") {
+        if (info[i]["isTwoLevelGrade"]) {
             iconName = "view_agenda";
         } else if (info[i]["grade"] == "F") {
             iconName = "cancel"
@@ -107,7 +106,7 @@ function calculateGPA(checked) {
     for (let i = 0; i < info.length; i++) {
         if (checked[i]) {
             credits += info[i]["credits"];
-            if (info[i]["isTwoLevelGrade"] == "false") {
+            if (!info[i]["isTwoLevelGrade"]) {
                 validCredits += info[i]["credits"];
                 gradeSum += info[i]["credits"] * convertGrade(info[i]["grade"]);
             }

@@ -8,15 +8,14 @@ function run(){
 	let str = "?courseLength=" + data.length;
 	let count = 0;
 	for (item of data){
-		str += "&twoLevelGrade" + count + "=" + (item["CJFS"] == 'A');
-		str += "&courseCode" + count + "=" + item["KCBH"];
-		str += "&grade" + count + "=" + item["ZCJ"];
-		str += "&courseName" + count + "=" + item["KCMC"];
-		str += "&department" + count + "=" + item["KKBM"];
-		str += "&semester" + count + "=" + item["XQMC"];
-		str += "&credits" + count + "=" + item["XF"];
-		str += "&learningHours" + count + "=" + item["ZXS"];
-		str += "&englishCourseName" + count + "=" + item["KCYWMC"];
+		str += "&t" + count + "=" + item["CJFS"];//twoLevelGrade
+		str += "&cc" + count + "=" + item["KCBH"];//courseCode
+		str += "&g" + count + "=" + item["ZCJ"];//grade
+		str += "&cn" + count + "=" + item["KCMC"];//courseName
+		str += "&d" + count + "=" + item["KKBM"];//department
+		str += "&s" + count + "=" + item["XQMC"];//semester
+		str += "&c" + count + "=" + item["XF"];//credits
+		str += "&lh" + count + "=" + item["ZXS"];//learningHours
 		count++;
 	}
 	console.log("Processing...");
