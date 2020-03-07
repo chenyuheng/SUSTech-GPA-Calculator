@@ -5,7 +5,6 @@ function run(){
 	xhttp.send("json=json&pageSize=100&pageNumber=1");
 	let responseText = xhttp.responseText;
 	let data = JSON.parse(responseText)["datas"]["pageAction"]["rows"];
-	console.log(data);
 	let str = "?courseLength=" + data.length;
 	let count = 0;
 	for (item of data){
@@ -20,6 +19,6 @@ function run(){
 		str += "&englishCourseName" + count + "=" + item["KCYWMC"];
 		count++;
 	}
-
-	window.open('http://localhost:8000/content.html' + str, 'target', '');
+	console.log("Processing...");
+	window.open('https://chenyuheng.github.io/SUSTech-GPA-Calculator/content.html' + str, 'target', '');
 }
