@@ -203,7 +203,7 @@ function refreshAddress() {
     }
     let count = 0;
     for (item of info) {
-        str += "&t" + count + "=" + item["isTwoLevelGrade"];//twoLevelGrade
+        str += "&t" + count + "=" + (item["isTwoLevelGrade"] ? "A" : "D");//twoLevelGrade
         str += "&cc" + count + "=" + item["courseCode"];//courseCode
         str += "&g" + count + "=" + item["grade"];//grade
         str += "&s" + count + "=" + item["semesterCode"]
