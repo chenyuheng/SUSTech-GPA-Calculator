@@ -40,6 +40,6 @@ function run(){
 		count++;
 	}
 	console.log("Processing...");
-	//window.open('https://chenyuheng.github.io/SUSTech-GPA-Calculator/content.html' + str, 'target', '');
-	window.open('http://localhost:8000/content.html' + str, 'target', '');
+	window.open('https://chenyuheng.github.io/SUSTech-GPA-Calculator/content.html' + str, 'target', '');
+	//window.open('http://localhost:8000/content.html' + str, 'target', '');
 }
