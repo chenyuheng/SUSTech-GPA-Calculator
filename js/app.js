@@ -55,6 +55,7 @@ function getInfo() {
                 "-" + item["semesterCode"].substring(2, 3);
         } else {
             item["semester"] = item["semesterCode"];
+            item["semesterCode"] = item["semester"].substring(2, 4) + item["semester"].substring(10, 11);//semester
         }
         item["courseName"] = getName(data, item["courseCode"], "name");
         item["department"] = getName(data, item["courseCode"], "faculty");
