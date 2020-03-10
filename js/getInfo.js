@@ -30,7 +30,7 @@ function run(){
 		str += "&t" + count + "=" + item["CJFS"];//twoLevelGrade
 		str += "&cc" + count + "=" + item["KCBH"];//courseCode
 		str += "&g" + count + "=" + item["ZCJ"];//grade
-		str += "&s" + count + "=" + item["XQMC"].substring(3, 4) + item["XQMC"].substring(11, 11);//semester
+		str += "&s" + count + "=" + item["XQMC"].substring(2, 4) + item["XQMC"].substring(10, 11);//semester
 		str += "&c" + count + "=" + item["XF"];//credits
 		str += "&lh" + count + "=" + item["ZXS"];//learningHours
 		if (getName(courseData, item["KCBH"], "name") == null) {
@@ -40,6 +40,6 @@ function run(){
 		count++;
 	}
 	console.log("Processing...");
-	window.open('https://chenyuheng.github.io/SUSTech-GPA-Calculator/content.html' + str, 'target', '');
-	//window.open('http://localhost:8000/content.html' + str, 'target', '');
+	//window.open('https://chenyuheng.github.io/SUSTech-GPA-Calculator/content.html' + str, 'target', '');
+	window.open('http://localhost:8000/content.html' + str, 'target', '');
 }

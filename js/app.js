@@ -1,4 +1,5 @@
 var info;
+var courseData;
 
 function getPara(name) {
     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
@@ -22,27 +23,38 @@ function getCourseData() {
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
     xhttp.send();
     let data = JSON.parse(xhttp.responseText)["data"];
+    courseData = data;
     return data;
 }
 
 function getInfo() {
-    let courseLength = getPara("checked").length;
     let data = getCourseData();
     let info = [];
-    for (let i = 0; i < courseLength; i++) {
+    let checked = getPara("checked");
+    if (checked == null) {
+        checked = "";
+    }
+    for (let i = 0; i < 100; i++) {
         item = [];
+        if (getPara("t" + i) == null) {
+            break;
+        }
         item["isTwoLevelGrade"] = getPara("t" + i) == 'A';
         item["courseCode"] = decodeURI(getPara("cc" + i));
         item["grade"] = getPara("g" + i);
-        item["semester"] = decodeURI(getPara("s" + i));
+        item["semesterCode"] = decodeURI(getPara("s" + i));
         item["credits"] = parseInt(getPara("c" + i));
         item["learningHours"] = getPara("lh" + i);
-        item["checked"] = getPara("checked").charAt(i) == 1;
-
-        if (item["semester"].length == 3) {
-            item["semester"] = "20" + item["semester"].substring(0, 2) + 
-                "-20" + (parseInt(item["semester"].substring(0, 2)) + 1) +
-                item["semester"].substring(2, 2);
+        item["checked"] = true;
+        if (checked.length > i) {
+            item["checked"] = checked.charAt(i) != '0';
+        }
+        if (item["semesterCode"].length == 3) {
+            item["semester"] = "20" + item["semesterCode"].substring(0, 2) + 
+                "-20" + (parseInt(item["semesterCode"].substring(0, 2)) + 1) +
+                "-" + item["semesterCode"].substring(2, 3);
+        } else {
+            item["semester"] = item["semesterCode"];
         }
         item["courseName"] = getName(data, item["courseCode"], "name");
         item["department"] = getName(data, item["courseCode"], "faculty");
@@ -93,6 +105,9 @@ function display() {
         str += node;
     }
     document.getElementById("courseList").innerHTML = str;
+    for (let i = 0; i < info.length; i++) {
+        document.getElementById("course" + i).checked = info[i].checked;
+    }
 }
 
 // 参考：https://sustc.wiki/GPA
@@ -127,13 +142,13 @@ function convertGrade(levelGrade) {
     return null;
 }
 
-function calculateGPA(checked) {
+function calculateGPA() {
     let credits = 0;
     let validCredits = 0;
     let courseNum = 0;
     let gradeSum = 0;
     for (let i = 0; i < info.length; i++) {
-        if (checked[i]) {
+        if (info[i].checked) {
             credits += info[i]["credits"];
             if (!info[i]["isTwoLevelGrade"]) {
                 validCredits += info[i]["credits"];
@@ -152,11 +167,10 @@ function calculateGPA(checked) {
 }
 
 function refresh() {
-    let checked = new Array();
     let allSelected = true;
     for (let i = 0; i < info.length; i++) {
-        checked[i] = document.getElementById("course" + i).checked;
-        allSelected = allSelected && checked[i];
+        info[i].checked = document.getElementById("course" + i).checked;
+        allSelected = allSelected && info[i].checked;
     }
     if (allSelected) {
         document.getElementById("selectAll").checked = true;
@@ -165,7 +179,8 @@ function refresh() {
         document.getElementById("selectAll").checked = false;
         document.getElementById("selectAllText").innerText = "全选";
     }
-    calculateGPA(checked);
+    calculateGPA();
+    refreshAddress();
 }
 
 function refreshSelectAll() {
@@ -179,7 +194,28 @@ function refreshSelectAll() {
         }
     }
     refresh();
+}
 
+function refreshAddress() {
+    let str = "content.html?checked=";
+    for (let i = 0; i < info.length; i++) {
+        str += info[i].checked ? "1" : "0";
+    }
+    let count = 0;
+    for (item of info) {
+        str += "&t" + count + "=" + item["isTwoLevelGrade"];//twoLevelGrade
+        str += "&cc" + count + "=" + item["courseCode"];//courseCode
+        str += "&g" + count + "=" + item["grade"];//grade
+        str += "&s" + count + "=" + item["semesterCode"]
+        str += "&c" + count + "=" + item["credits"];//credits
+        str += "&lh" + count + "=" + item["learningHours"];//learningHours
+        if (getName(courseData, item["courseCode"], "name") == null) {
+            str += "&cn" + count + "=" + item["name"];//courseName
+            str += "&d" + count + "=" + item["department"];//department
+        }
+        count++;
+    }
+    window.history.pushState(null, null, str);
 }
 
 function addEventListeners() {
