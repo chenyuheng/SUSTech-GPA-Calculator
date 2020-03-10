@@ -7,20 +7,49 @@ function getPara(name) {
     return null;
 }
 
+function getName(data, code, name) {
+    for (let i = 0; i < data.length; i++) {
+        if (data[i]["cid"] == code) {
+            return data[i][name];
+        }
+    }
+    return null;
+}
+
+function getCourseData() {
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "https://sustechflow.top/api/rate", false);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
+    xhttp.send();
+    let data = JSON.parse(xhttp.responseText)["data"];
+    return data;
+}
+
 function getInfo() {
-    let courseLength = getPara("courseLength");
-    console.log(courseLength);
+    let courseLength = getPara("checked").length;
+    let data = getCourseData();
     let info = [];
     for (let i = 0; i < courseLength; i++) {
         item = [];
         item["isTwoLevelGrade"] = getPara("t" + i) == 'A';
         item["courseCode"] = decodeURI(getPara("cc" + i));
         item["grade"] = getPara("g" + i);
-        item["courseName"] = decodeURI(getPara("cn" + i));
-        item["department"] = decodeURI(getPara("d" + i));
         item["semester"] = decodeURI(getPara("s" + i));
         item["credits"] = parseInt(getPara("c" + i));
         item["learningHours"] = getPara("lh" + i);
+        item["checked"] = getPara("checked").charAt(i) == 1;
+
+        if (item["semester"].length == 3) {
+            item["semester"] = "20" + item["semester"].substring(0, 2) + 
+                "-20" + (parseInt(item["semester"].substring(0, 2)) + 1) +
+                item["semester"].substring(2, 2);
+        }
+        item["courseName"] = getName(data, item["courseCode"], "name");
+        item["department"] = getName(data, item["courseCode"], "faculty");
+        if (item["courseName"] == null) {
+            item["courseName"] = decodeURI(getPara("cn" + i));
+            item["department"] = decodeURI(getPara("d") + i);
+        }
         info.push(item);
     }
     return info;
