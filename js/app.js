@@ -207,7 +207,7 @@ function refreshAddress() {
         str += "&t" + count + "=" + (item["isTwoLevelGrade"] ? "A" : "D");//twoLevelGrade
         str += "&cc" + count + "=" + item["courseCode"];//courseCode
         str += "&g" + count + "=" + item["grade"];//grade
-        str += "&s" + count + "=" + item["semesterCode"]
+        str += "&s" + count + "=" + item["semesterCode"];
         str += "&c" + count + "=" + item["credits"];//credits
         str += "&lh" + count + "=" + item["learningHours"];//learningHours
         if (getName(courseData, item["courseCode"], "name") == null) {
