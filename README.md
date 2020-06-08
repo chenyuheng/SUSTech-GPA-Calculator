@@ -18,22 +18,19 @@
 
 ### 导入课程成绩信息步骤
 
-1. 复制如下初始化代码：
+1. 复制如下代码：
 
 ```javascript
-var newscript = document.createElement('script');
-newscript.setAttribute('type','text/javascript');
-newscript.setAttribute('src','https://chenyuheng.github.io/SUSTech-GPA-Calculator/js/getInfo.js');
-head = document.getElementsByTagName('head')[0].appendChild(newscript);
+var newscript = document.createElement('script');newscript.setAttribute('type','text/javascript');newscript.setAttribute('src','https://chenyuheng.github.io/SUSTech-GPA-Calculator/js/getInfo.js');head = document.getElementsByTagName('head')[0].appendChild(newscript);run();
 ```
 
 2. [点击此链接](http://ehall.sustech.edu.cn/xhxsfw/sys/xsjwxx/*default/index.do)进入 ehall 学业信息页面。如未登录，请先登录。
 
-3. 按<code>F12</code>按键进入开发者模式，选择控制台（Console），在命令行位置粘贴刚刚复制的代码，按下回车执行代码。
-
-4. 然后输入<code>run()</code>，按下回车运行，此时会弹出 GPA 计算器的页面。如果浏览器屏蔽了自动弹窗，请取消屏蔽。
-
-   ![进入开发者模式后的操作示意图](img/操作示意图.png)
+3. 在浏览器地址栏**手动**输入如下代码：
+```javascript
+javascript:
+```
+4. 在浏览器地址栏如上代码的后面粘贴在第一步钟复制的代码，并按下回车键，稍等片刻，计算器页面将会弹出。如果浏览器禁用了弹窗，请改为允许此次弹窗。
 
 ## Demo
 
