@@ -151,7 +151,7 @@ function calculateGPA() {
     for (let i = 0; i < info.length; i++) {
         if (info[i].checked) {
             credits += info[i]["credits"];
-            if (!info[i]["isTwoLevelGrade"]) {
+            if (!info[i]["isTwoLevelGrade"] && info[i]["grade"]!="P") {
                 validCredits += info[i]["credits"];
                 gradeSum += info[i]["credits"] * convertGrade(info[i]["grade"]);
             }
