@@ -21,18 +21,18 @@
 1. 复制如下代码：
 
 ```javascript
-var newscript = document.createElement('script');newscript.setAttribute('type','text/javascript');newscript.setAttribute('src','https://chenyuheng.github.io/SUSTech-GPA-Calculator/js/getInfo.js');head = document.getElementsByTagName('head')[0].appendChild(newscript);run();
+$("head").append('<script type="text/javascript" src="https://chenyuheng.github.io/SUSTech-GPA-Calculator/js/getInfo.js"></script>');;
 ```
 
 2. [点击此链接](http://ehall.sustech.edu.cn/xhxsfw/sys/xsjwxx/*default/index.do)进入 ehall 学业信息页面。如未登录，请先登录。
 
-3. 在浏览器地址栏**手动**输入如下代码：
+3. 清空浏览器地址栏后，在浏览器地址栏**手动**输入如下代码：
 ```javascript
 javascript:
 ```
-4. 在浏览器地址栏如上代码的后面粘贴在第一步钟复制的代码，并按下回车键，稍等片刻，计算器页面将会弹出。如果浏览器禁用了弹窗，请改为允许此次弹窗。
+4. 在浏览器地址栏如上代码的后面粘贴在第一步中复制的代码，并按下回车键。
+5. 重复第三步，再输入 <code>run()</code> 后按下回车键。稍等片刻，GPA 计算器页面将会弹出。如果浏览器禁用了弹窗，请改为允许此次弹窗。
 
-5. 如果第4步没有弹出GPA计算器，请重复第3-4步。
 
 ## Demo
 
